@@ -45,8 +45,8 @@ public class CounterController {
       count = counter.get().getCount();
     }
 
-//    return ApiResponse.ok(count);
-    return ApiResponse.ok("luochanghao is ok");
+    return ApiResponse.ok(666);
+//    return ApiResponse.ok("luochanghao is ok");
   }
 
 
@@ -69,7 +69,7 @@ public class CounterController {
       counter.setId(1);
       counter.setCount(count);
       counterService.upsertCount(counter);
-      return ApiResponse.ok(count);
+      return ApiResponse.ok(666);
     } else if (request.getAction().equals("clear")) {
       if (!curCounter.isPresent()) {
         return ApiResponse.ok(0);
