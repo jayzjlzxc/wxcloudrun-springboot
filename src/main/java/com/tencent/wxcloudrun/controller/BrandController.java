@@ -42,7 +42,7 @@ public class BrandController {
         ResponseEntity<JSONObject> response = restTemplate.postForEntity("https://springboot-4nxe-127008-8-1331151085.sh.run.tcloudbase.com/tcb/uploadfile", jsonObject, JSONObject.class);
         JSONObject body = response.getBody();
         logger.info("body is "+body);
-        return ApiResponse.ok(brandService.getAll());
+        return ApiResponse.ok(body);
     }
 
     @GetMapping("/image")
