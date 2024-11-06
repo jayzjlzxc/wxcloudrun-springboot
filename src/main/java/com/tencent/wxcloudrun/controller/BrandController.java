@@ -25,6 +25,10 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
+    private String appid="wx15c9d1da24a248ee";
+    private String secret="b3956e69016052ee3bc4251418ab4b98";
+
+
 //    @Autowired
     private RestTemplate restTemplate = new RestTemplate();
 //    @PostMapping(value = "/addBrand")
@@ -38,8 +42,8 @@ public class BrandController {
     ApiResponse getAllBrand() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("env","prod-3gch6ubrece736c3");
-        jsonObject.put("path","pic");
-        ResponseEntity<JSONObject> response = restTemplate.postForEntity("https://springboot-4nxe-127008-8-1331151085.sh.run.tcloudbase.com/tcb/uploadfile", jsonObject, JSONObject.class);
+        jsonObject.put("path","pic/666.png");
+        ResponseEntity<JSONObject> response = restTemplate.postForEntity("https://springboot-4nxe-127008-8-1331151085.sh.run.tcloudbase.com/tcb/uploadfile?access_token=86_4Vtw2uEGQXS9sFO4NeOX1tVGCip8zy1NdANRAmrYOzTi1Q64y5k1yn9-R3j2I65dWbdHIcsoGLPShd5b9l3K46gGfxQrT5QIYTNfKP8F-qOhI9_-O_TndWAoNg0XORfADAOFI", jsonObject, JSONObject.class);
         JSONObject body = response.getBody();
         logger.info("body is "+body);
         return ApiResponse.ok(body);
