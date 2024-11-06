@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.BrandMapper">
+
+    <resultMap id="brandMapper" type="com.tencent.wxcloudrun.model.Brand">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="icon" column="icon"/>
+        <result property="priceUrl" column="priceUrl"/>
+
+    </resultMap>
+
+    <select id="getAll" resultMap="brandMapper" parameterType="java.lang.Integer">
+        SELECT *  FROM brand
+    </select>
+
+    <insert id="addBrand" parameterType="com.tencent.wxcloudrun.model.Brand">
+        INSERT INTO `brand`(`name`, `icon`,`priceUrl`)
+            VALUE(#{name}, #{icon},#{priceUrl})
+    </insert>
+
+<!--    <update id="updateUser" parameterType="com.tencent.wxcloudrun.model.User">-->
+<!--        INSERT INTO `user`(`id`, `count`)-->
+<!--        VALUE(#{id}, #{count}) -->
+<!--        ON DUPLICATE KEY UPDATE count=#{count}-->
+<!--    </update>-->
+
+    <delete id="deleteBrand" parameterType="java.lang.Integer">
+        DELETE
+        FROM brand
+        where id = #{id}
+    </delete>
+
+</mapper>

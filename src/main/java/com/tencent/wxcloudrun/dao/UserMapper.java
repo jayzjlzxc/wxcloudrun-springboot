@@ -12,5 +12,7 @@ public interface UserMapper {
 
   void addUser(User user);
 
+  void deleteUser(Integer id);
+
 //  void clearCount(@Param("id") Integer id);
 }
