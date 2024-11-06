@@ -43,8 +43,8 @@ public class BrandController {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("env","prod-3gch6ubrece736c3");
         jsonObject.put("path","pic/666.png");
-        ResponseEntity<JSONObject> response = restTemplate.postForEntity("https://api.weixin.qq.com/tcb/uploadfile?access_token=86_4Vtw2uEGQXS9sFO4NeOX1tVGCip8zy1NdANRAmrYOzTi1Q64y5k1yn9-R3j2I65dWbdHIcsoGLPShd5b9l3K46gGfxQrT5QIYTNfKP8F-qOhI9_-O_TndWAoNg0XORfADAOFI", jsonObject, JSONObject.class);
-        JSONObject body = response.getBody();
+        ResponseEntity<String> response = restTemplate.postForEntity("https://api.weixin.qq.com/tcb/uploadfile?access_token=86_4Vtw2uEGQXS9sFO4NeOX1tVGCip8zy1NdANRAmrYOzTi1Q64y5k1yn9-R3j2I65dWbdHIcsoGLPShd5b9l3K46gGfxQrT5QIYTNfKP8F-qOhI9_-O_TndWAoNg0XORfADAOFI", jsonObject, String.class);
+        String body = response.getBody();
         logger.info("body is "+body);
         return ApiResponse.ok(body);
     }
