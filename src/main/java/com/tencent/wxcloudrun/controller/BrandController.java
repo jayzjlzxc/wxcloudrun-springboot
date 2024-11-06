@@ -25,8 +25,8 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
-    @Autowired
-    private RestTemplate restTemplate;
+//    @Autowired
+    private RestTemplate restTemplate = new RestTemplate();
 //    @PostMapping(value = "/addBrand")
 //    ApiResponse addBrand(@RequestBody UserInfo userInfo) {
 //        logger.info("login post request");
