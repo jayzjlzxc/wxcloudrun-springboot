@@ -53,7 +53,7 @@ public class BrandController {
         filePathHeaders.setContentType(MediaType.APPLICATION_JSON);
         //2.2设置请求体
         Map<String, Object> filePathRequestData = new HashMap<>();
-        filePathRequestData.put("env", "prod-3gch6ubrece736c3");
+        filePathRequestData.put("env", "logan9527-7gnmrdbqd718ef07");
         filePathRequestData.put("path", "pic/666.png");
         //2.3将请求体转换为JSON字符串
         ObjectMapper objectMapper = new ObjectMapper();
