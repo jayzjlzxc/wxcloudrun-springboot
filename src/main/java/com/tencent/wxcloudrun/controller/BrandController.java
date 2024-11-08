@@ -31,8 +31,8 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
-    private String APPID="wx15c9d1da24a248ee";
-    private String APPSECRET="b3956e69016052ee3bc4251418ab4b98";
+    private String APPID="wx5b307377104d16cd";
+    private String APPSECRET="084dbf7624f1e3b830b0b4a9860b53b2";
 
 
 //    @Autowired
