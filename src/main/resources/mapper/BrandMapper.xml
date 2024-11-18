@@ -31,4 +31,8 @@
         where id = #{id}
     </delete>
 
+    <update id="updatePic" parameterType="com.tencent.wxcloudrun.model.Brand">
+        update brand set priceUrl = #{priceUrl} where id = #{id}
+    </update>
+
 </mapper>

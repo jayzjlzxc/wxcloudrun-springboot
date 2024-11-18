@@ -32,10 +32,11 @@ public class BrandController {
     private BrandService brandService;
 
     private String APPID="wx5b307377104d16cd";
-    private String APPSECRET="084dbf7624f1e3b830b0b4a9860b53b2";
+    private String APPSECRET="fd6b3ce50f51d25e7dddd7d4cdcae6e5";
 
 
 //    @Autowired
+
     private RestTemplate restTemplate = new RestTemplate();
 //    @PostMapping(value = "/addBrand")
 //    ApiResponse addBrand(@RequestBody UserInfo userInfo) {
@@ -46,93 +47,38 @@ public class BrandController {
 
     @GetMapping(value = "/getAllBrand")
     ApiResponse getAllBrand() {
-        RestTemplate restTemplate = new RestTemplate();
-        String filePathUrl = "https://api.weixin.qq.com/tcb/uploadfile?access_token="+getAccessToken();
-        //2.1设置请求头
-        HttpHeaders filePathHeaders = new HttpHeaders();
-        filePathHeaders.setContentType(MediaType.APPLICATION_JSON);
-        //2.2设置请求体
-        Map<String, Object> filePathRequestData = new HashMap<>();
-        filePathRequestData.put("env", "logan9527-7gnmrdbqd718ef07");
-        filePathRequestData.put("path", "pic/666.png");
-        //2.3将请求体转换为JSON字符串
-        ObjectMapper objectMapper = new ObjectMapper();
-        String filePathRequestDataToJSON = "";
-        try {
-            filePathRequestDataToJSON = objectMapper.writeValueAsString(filePathRequestData);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        //2.4创建请求实体
-        org.springframework.http.HttpEntity<String> filePathRequestEntity = new org.springframework.http.HttpEntity<>(filePathRequestDataToJSON, filePathHeaders);
-        System.out.println(filePathRequestEntity);
-        //2.5发送请求并获取响应
-        ResponseEntity<String> filePathResponseEntity = restTemplate.postForEntity(filePathUrl, filePathRequestEntity, String.class);
-        //2.6打印响应数据
-        if (filePathResponseEntity.getStatusCode().is2xxSuccessful()) {
-            String responseBody = filePathResponseEntity.getBody();
-            if (responseBody != null) {
-                System.out.println("上传链接获取成功：" + responseBody);
-                return ApiResponse.ok(responseBody);
-            } else {
-                System.out.println("响应体为空");
-                return null;
-            }
-        } else {
-            System.out.println("请求失败：" + filePathResponseEntity.getStatusCode());
-            return null;
-        }
-    }
-
-    public String getAccessToken()
-    {
-        //1.获取access_token
-        RestTemplate restTemplate = new RestTemplate();
-        String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + APPID + "&secret=" + APPSECRET;
-        ResponseEntity<Map> responseToken = restTemplate.getForEntity(tokenUrl, Map.class);
-        String accessToken = (String) responseToken.getBody().get("access_token");
-        return accessToken;
+        return ApiResponse.ok(brandService.getAll());
     }
 
 
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("env","prod-3gch6ubrece736c3");
-//        jsonObject.put("path","pic/666.png");
-//        ResponseEntity<String> response = restTemplate.postForEntity("https://api.weixin.qq.com/tcb/uploadfile?access_token=86_4Vtw2uEGQXS9sFO4NeOX1tVGCip8zy1NdANRAmrYOzTi1Q64y5k1yn9-R3j2I65dWbdHIcsoGLPShd5b9l3K46gGfxQrT5QIYTNfKP8F-qOhI9_-O_TndWAoNg0XORfADAOFI", jsonObject, String.class);
-//        String body = response.getBody();
-//        logger.info("body is "+body);
-//        return ApiResponse.ok(body);
-
-
-    @GetMapping("/image")
-    void getImage(@RequestParam("id") Integer id, HttpServletResponse response) {
-        try {
-            Resource resource = new ClassPathResource("pic/"+id+".png");
-            File file = resource.getFile();
-            if (file.exists()) {
-                byte[] data = null;
-                FileInputStream input = new FileInputStream(file);
-                data = new byte[input.available()];
-                input.read(data);
-                // 根据文件类型，设置文件Content-Type
-                response.setContentType("image/png");
-                response.getOutputStream().write(data);
-                input.close();
-            }
-        } catch (IOException e) {
-            logger.error("文件不存在");
-        }
+    @GetMapping("/getPic")
+    void getImage(HttpServletResponse response) {
+//        try {
+//            Resource resource = new ClassPathResource("pic/"+id+".png");
+//            File file = resource.getFile();
+//            if (file.exists()) {
+//                byte[] data = null;
+//                FileInputStream input = new FileInputStream(file);
+//                data = new byte[input.available()];
+//                input.read(data);
+//                // 根据文件类型，设置文件Content-Type
+//                response.setContentType("image/png");
+//                response.getOutputStream().write(data);
+//                input.close();
+//            }
+//        } catch (IOException e) {
+//            logger.error("文件不存在");
+//        }
     }
 
-    @PostMapping("/upload")
+        @PostMapping("/update")
     void uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id){
 
-        String filePath = getClass().getResource("/pic/").getPath();
         try {
-            file.transferTo(new File(filePath + id +".png"));
-            logger.info("图片上传成功");
-        } catch (IOException e) {
-            logger.error("上传图片失败");
+            brandService.update(file, id);
+            logger.info("报价更新成功");
+        } catch (Exception e) {
+            logger.error("报价更新失败");
         }
     }
 

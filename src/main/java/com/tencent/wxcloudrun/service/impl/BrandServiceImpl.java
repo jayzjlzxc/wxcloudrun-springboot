@@ -7,10 +7,15 @@ import com.tencent.wxcloudrun.model.Brand;
 import com.tencent.wxcloudrun.model.User;
 import com.tencent.wxcloudrun.service.BrandService;
 import com.tencent.wxcloudrun.service.LoginService;
+import com.tencent.wxcloudrun.util.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BrandServiceImpl implements BrandService {
@@ -31,5 +36,18 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void deleteBrand(Integer id) {
         mapper.deleteBrand(id);
+    }
+
+    @Override
+    public String update(MultipartFile file, Integer id) {
+        try {
+            byte[] bytes = file.getBytes();
+            String picUrl = FileUpload.uploadMain(String.valueOf(id) + ".png", bytes);
+            Brand brand = Brand.builder().id(id).priceUrl(picUrl).build();
+            mapper.updatePic(brand);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 }

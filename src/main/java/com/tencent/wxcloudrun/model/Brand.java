@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
  * 手机品牌，小米华为苹果等等
  */
 @Data
+@Builder
 public class Brand {
     private Integer id;
 

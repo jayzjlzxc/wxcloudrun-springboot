@@ -5,6 +5,7 @@ import com.tencent.wxcloudrun.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface BrandMapper {
@@ -12,4 +13,6 @@ public interface BrandMapper {
     void addBrand(Brand b);
 
     void deleteBrand(Integer id);
+
+    void updatePic(Brand brand);
 }
