@@ -15,6 +15,10 @@
         SELECT *  FROM brand where flag=1
     </select>
 
+    <select id="getAllPrice" resultMap="brandMapper" parameterType="java.lang.Integer">
+        SELECT *  FROM brand
+    </select>
+
     <insert id="addBrand" parameterType="com.tencent.wxcloudrun.model.Brand">
         INSERT INTO `brand`(`name`, `icon`,`priceUrl`)
             VALUE(#{name}, #{icon},#{priceUrl})

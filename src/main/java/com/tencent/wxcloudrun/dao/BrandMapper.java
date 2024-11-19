@@ -15,4 +15,6 @@ public interface BrandMapper {
     void deleteBrand(Integer id);
 
     void updatePic(Brand brand);
+
+    List<Brand> getAllPrice();
 }

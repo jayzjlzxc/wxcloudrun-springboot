@@ -48,6 +48,6 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public List<Brand> getAllPrice() {
-        return mapper.getAllBrand();
+        return mapper.getAllPrice();
     }
 }
