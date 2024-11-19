@@ -10,7 +10,7 @@
 
     </resultMap>
 
-    <select id="getAll" resultMap="brandMapper" parameterType="java.lang.Integer">
+    <select id="getAllBrand" resultMap="brandMapper" parameterType="java.lang.Integer">
         SELECT *  FROM brand
     </select>
 

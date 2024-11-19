@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.tencent.wxcloudrun.dao.BrandMapper;
 import com.tencent.wxcloudrun.model.Brand;
 import com.tencent.wxcloudrun.service.BrandService;
@@ -18,8 +19,8 @@ public class BrandServiceImpl implements BrandService {
     private BrandMapper mapper;
 
     @Override
-    public List<Brand> getAll() {
-        return mapper.getAll();
+    public List<Brand> getAllBrand() {
+        return mapper.getAllBrand();
     }
 
     @Override
@@ -43,5 +44,10 @@ public class BrandServiceImpl implements BrandService {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    @Override
+    public List<Brand> getAllPrice() {
+        return mapper.getAllBrand();
     }
 }

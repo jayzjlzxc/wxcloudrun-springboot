@@ -24,7 +24,11 @@ public class LoginController {
     @PostMapping(value = "/login")
     ApiResponse create(@RequestBody UserInfo userInfo) {
         logger.info("login post request");
-        loginService.login(userInfo);
-        return ApiResponse.ok("success");
+        Boolean login = loginService.login(userInfo);
+        if (login){
+            return ApiResponse.ok("success");
+        }else{
+            return ApiResponse.error("帐号或密码错误");
+        }
     }
 }

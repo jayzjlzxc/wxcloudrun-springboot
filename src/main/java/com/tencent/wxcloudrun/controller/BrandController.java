@@ -47,12 +47,17 @@ public class BrandController {
 
     @GetMapping(value = "/getAllBrand")
     ApiResponse getAllBrand() {
-        return ApiResponse.ok(brandService.getAll());
+        return ApiResponse.ok(brandService.getAllBrand());
+    }
+
+    @GetMapping(value = "/getAllPrice")
+    ApiResponse getAllPrice() {
+        return ApiResponse.ok(brandService.getAllPrice());
     }
 
 
-    @GetMapping("/getPic")
-    void getImage(HttpServletResponse response) {
+//    @GetMapping("/getPic")
+//    void getImage(HttpServletResponse response) {
 //        try {
 //            Resource resource = new ClassPathResource("pic/"+id+".png");
 //            File file = resource.getFile();
@@ -69,7 +74,7 @@ public class BrandController {
 //        } catch (IOException e) {
 //            logger.error("文件不存在");
 //        }
-    }
+//    }
 
         @PostMapping("/update")
     void uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id){

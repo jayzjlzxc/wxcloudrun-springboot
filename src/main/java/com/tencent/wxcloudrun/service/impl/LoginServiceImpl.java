@@ -13,12 +13,15 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserMapper mapper;
     @Override
-    public String login(UserInfo userInfo) {
-
-        User user = new User();
-        user.setName(userInfo.getUsername());
-        user.setPassword(userInfo.getPassword());
-        mapper.addUser(user);
-        return "success";
+    public Boolean login(UserInfo userInfo) {
+        if ("changjiang".equalsIgnoreCase(userInfo.getUsername())&&"changjiang666".equalsIgnoreCase(userInfo.getPassword())){
+            return true;
+        }else{
+            return false;
+        }
+//        User user = new User();
+//        user.setName(userInfo.getUsername());
+//        user.setPassword(userInfo.getPassword());
+//        mapper.addUser(user);
     }
 }

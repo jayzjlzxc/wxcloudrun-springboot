@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Mapper
 public interface BrandMapper {
-    List<Brand> getAll();
+    List<Brand> getAllBrand();
     void addBrand(Brand b);
 
     void deleteBrand(Integer id);

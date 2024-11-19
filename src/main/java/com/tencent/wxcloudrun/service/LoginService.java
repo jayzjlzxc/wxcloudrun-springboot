@@ -6,5 +6,5 @@ import org.springframework.stereotype.Component;
 
 //@Component
 public interface LoginService {
-    String login(UserInfo userInfo);
+    Boolean login(UserInfo userInfo);
 }
