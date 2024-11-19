@@ -21,4 +21,6 @@ public class Brand {
     //报价url
     private String priceUrl;
 
+    private int flag;
+
 }

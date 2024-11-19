@@ -7,11 +7,12 @@
         <result property="name" column="name"/>
         <result property="icon" column="icon"/>
         <result property="priceUrl" column="priceUrl"/>
+        <result property="flag" column="flag"/>
 
     </resultMap>
 
     <select id="getAllBrand" resultMap="brandMapper" parameterType="java.lang.Integer">
-        SELECT *  FROM brand
+        SELECT *  FROM brand where flag=1
     </select>
 
     <insert id="addBrand" parameterType="com.tencent.wxcloudrun.model.Brand">
