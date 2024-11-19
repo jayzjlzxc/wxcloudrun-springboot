@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FilePath {
+public class Helper {
     /**
      * 获取accessToken
      * @return
