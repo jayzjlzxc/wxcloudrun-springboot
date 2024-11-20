@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tencent.wxcloudrun.controller.BrandController;
+import com.tencent.wxcloudrun.service.impl.BrandServiceImpl;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -14,6 +15,8 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -32,6 +35,9 @@ public class FileUpload {
     @Autowired
     BrandController controller;
 
+    final static Logger logger = LoggerFactory.getLogger(FileUpload.class);;
+
+
 
     /**
      * 主方法
@@ -45,15 +51,15 @@ public class FileUpload {
         if (!response.isEmpty()) {
             HttpResponse httpResponse = FileUpload.uploadFile(fileName, response, bytes);
             if (httpResponse.getStatusLine().getStatusCode() == 204) {
-                System.out.println("文件--- " + fileName + " ---上传成功");
+                logger.info("文件--- " + fileName + " ---上传成功");
                 String downloadUrl = FileUpload.getDownloadUrl(response);
                 return downloadUrl;
             }else {
-                System.out.println("文件--- " + fileName + " ---上传失败");
+                logger.info("文件--- " + fileName + " ---上传失败");
                 return "error";
             }
         } else {
-            System.out.println("文件路径获取失败");
+            logger.error("文件路径获取失败");
             return "error";
         }
     }

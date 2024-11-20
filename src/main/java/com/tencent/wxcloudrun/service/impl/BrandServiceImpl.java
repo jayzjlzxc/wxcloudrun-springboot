@@ -1,10 +1,13 @@
 package com.tencent.wxcloudrun.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
+import com.tencent.wxcloudrun.controller.BrandController;
 import com.tencent.wxcloudrun.dao.BrandMapper;
 import com.tencent.wxcloudrun.model.Brand;
 import com.tencent.wxcloudrun.service.BrandService;
 import com.tencent.wxcloudrun.util.FileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +20,8 @@ public class BrandServiceImpl implements BrandService {
 
     @Autowired
     private BrandMapper mapper;
+
+    final Logger logger = LoggerFactory.getLogger(BrandServiceImpl.class);;
 
     @Override
     public List<Brand> getAllBrand() {
@@ -41,6 +46,7 @@ public class BrandServiceImpl implements BrandService {
             Brand brand = Brand.builder().id(id).priceUrl(picUrl).build();
             mapper.updatePic(brand);
         } catch (IOException e) {
+            logger.error("更新报价失败，原因为："+e);
             throw new RuntimeException(e);
         }
         return null;

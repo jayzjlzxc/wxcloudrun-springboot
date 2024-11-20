@@ -80,10 +80,10 @@ public class BrandController {
     void uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id){
 
         try {
-            brandService.update(file, id);
+            String update = brandService.update(file, id);
             logger.info("报价更新成功");
         } catch (Exception e) {
-            logger.error("报价更新失败");
+            logger.error("报价更新失败",e);
         }
     }
 
