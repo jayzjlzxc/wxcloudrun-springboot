@@ -10,6 +10,9 @@ spring:
     username: root
 #    password: 10010
     password: Vae10010
+    hikari:
+      max-lifetime: 60000
+
   mvc:
     view:
       suffix: .html
