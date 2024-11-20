@@ -95,14 +95,14 @@ public class FileUpload {
                 List fileList = (List) responseBody.get("file_list");
                 Map map = (Map) fileList.get(0);
                 String downloadUrl = (String) map.get("download_url");
-                System.out.println("下载链接获取成功：" + downloadUrl);
+                logger.info("下载链接获取成功：" + downloadUrl);
                 return downloadUrl;
             } else {
-                System.out.println("响应体为空");
+                logger.info("响应体为空");
                 return null;
             }
         } else {
-            System.out.println("请求失败：" + filePathResponseEntity.getStatusCode());
+            logger.info("请求失败：" + filePathResponseEntity.getStatusCode());
             return null;
         }
 
@@ -129,7 +129,7 @@ public class FileUpload {
             fos.write(bytes);
             fos.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("上传文件失败，原因为：",e);
         }
 
 //        File file = new File("src/main/resources/images/iceberg.jpg");
@@ -146,10 +146,10 @@ public class FileUpload {
 
         try (CloseableHttpResponse uploadResponse = httpClient.execute(uploadFilePost)) {
             int code = uploadResponse.getStatusLine().getStatusCode();
-            System.out.println("Response Code: " + code);
+            logger.info("Response Code: " + code);
             return uploadResponse;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("上传文件失败，原因为：",e);
             return null;
         }
     }

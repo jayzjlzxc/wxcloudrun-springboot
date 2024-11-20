@@ -1,7 +1,10 @@
 package com.tencent.wxcloudrun.util;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Helper {
+
+    final static Logger logger = LoggerFactory.getLogger(Helper.class);;
+
     /**
      * 获取accessToken
      * @return
@@ -54,19 +60,19 @@ public class Helper {
         org.springframework.http.HttpEntity<String> filePathRequestEntity = new org.springframework.http.HttpEntity<>(filePathRequestDataToJSON, filePathHeaders);
         System.out.println(filePathRequestEntity);
         //2.5发送请求并获取响应
-        ResponseEntity<Map> filePathResponseEntity = restTemplate.postForEntity(filePathUrl, filePathRequestEntity, Map.class);
+        ResponseEntity<String> filePathResponseEntity = restTemplate.postForEntity(filePathUrl, filePathRequestEntity, String.class);
         //2.6打印响应数据
         if (filePathResponseEntity.getStatusCode().is2xxSuccessful()) {
-            Map responseBody = filePathResponseEntity.getBody();
+            Map responseBody = JSON.parseObject(filePathResponseEntity.getBody());
             if (responseBody != null) {
-                System.out.println("上传链接获取成功：" + responseBody);
+                logger.info("上传链接获取成功：" + responseBody);
                 return responseBody;
             } else {
-                System.out.println("响应体为空");
+                logger.info("响应体为空");
                 return null;
             }
         } else {
-            System.out.println("请求失败：" + filePathResponseEntity.getStatusCode());
+            logger.info("请求失败：" + filePathResponseEntity.getStatusCode());
             return null;
         }
     }

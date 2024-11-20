@@ -42,11 +42,11 @@ public class BrandServiceImpl implements BrandService {
     public String update(MultipartFile file, Integer id) {
         try {
             byte[] bytes = file.getBytes();
-            String picUrl = FileUpload.upload(String.valueOf(id) + ".png", bytes);
+            String picUrl = FileUpload.upload(id + ".png", bytes);
             Brand brand = Brand.builder().id(id).priceUrl(picUrl).build();
             mapper.updatePic(brand);
         } catch (IOException e) {
-            logger.error("更新报价失败，原因为："+e);
+            logger.error("更新报价失败，原因为：", e);
             throw new RuntimeException(e);
         }
         return null;
