@@ -1,5 +1,6 @@
 package com.tencent.wxcloudrun.util;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -87,10 +88,10 @@ public class FileUpload {
         org.springframework.http.HttpEntity<String> filePathRequestEntity = new org.springframework.http.HttpEntity<>(filePathRequestDataToJSON, filePathHeaders);
         System.out.println(filePathRequestEntity);
         //2.5发送请求并获取响应
-        ResponseEntity<Map> filePathResponseEntity = restTemplate.postForEntity(filePathUrl, filePathRequestEntity, Map.class);
+        ResponseEntity<String> filePathResponseEntity = restTemplate.postForEntity(filePathUrl, filePathRequestEntity, String.class);
         //2.6打印响应数据
         if (filePathResponseEntity.getStatusCode().is2xxSuccessful()) {
-            Map responseBody = filePathResponseEntity.getBody();
+            Map responseBody = JSON.parseObject(filePathResponseEntity.getBody());
             if (responseBody != null) {
                 List fileList = (List) responseBody.get("file_list");
                 Map map = (Map) fileList.get(0);

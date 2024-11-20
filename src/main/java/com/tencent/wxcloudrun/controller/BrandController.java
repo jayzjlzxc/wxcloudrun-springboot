@@ -77,15 +77,18 @@ public class BrandController {
 //    }
 
         @PostMapping("/update")
-    void uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id){
-
-        try {
-            String update = brandService.update(file, id);
-            logger.info("报价更新成功");
-        } catch (Exception e) {
-            logger.error("报价更新失败",e);
+        ApiResponse uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id) {
+            try {
+                Boolean update = brandService.update(file, id);
+                if (update) {
+                    logger.info("报价更新成功");
+                    return ApiResponse.ok("报价更新成功");
+                }
+            } catch (Exception e) {
+                logger.error("报价更新失败", e);
+            }
+            return ApiResponse.error("报价更新失败");
         }
-    }
 
 
 }

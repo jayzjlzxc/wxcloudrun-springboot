@@ -17,7 +17,7 @@ public interface BrandService {
 
     void deleteBrand(Integer id);
 
-    String update(MultipartFile file, Integer id);
+    Boolean update(MultipartFile file, Integer id);
 
     List<Brand> getAllPrice();
 }
